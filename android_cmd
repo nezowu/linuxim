@@ -1,0 +1,7 @@
+$ su
+# mount -o remount,rw /system
+# cp /storage/sdcard1/linuxim /system/bin/
+# chmod 755 /system/bin/linuxim
+# mount -o remount,ro /system
+# linuxim
+# root@localhost

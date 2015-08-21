@@ -1,0 +1,17 @@
+cat >> /etc/apt/sources.list << STOP
+deb http://ftp.debian.org/debian/ jessie-updates main
+deb http://security.debian.org/ jessie/updates main
+STOP
+
+apt-get update
+apt-get install apt-utils whiptail
+
+apt install sudo vim locales
+
+
+adduser nez
+adduser nez sudo
+
+dpkg-reconfigure locales
+dpkg-reconfigure tzdata
+
