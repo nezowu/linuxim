@@ -1,0 +1,13 @@
+dd if=/dev/zero of=debian.img bs=10M count=1536
+sudo mkfs.ext4 -v debian.img
+sudo mount -o loop debian.img /mnt
+sudo debootstrap --arch=armhf --variant=minbase --foreign --no-check-gpg \
+--verbose jessie /mnt http://ftp.de.debian.org/debian
+sudo cp /usr/bin/qemu-arm-static /mnt/usr/bin
+LANG=C sudo chroot /mnt /usr/bin/qemu-arm-static /bin/bash ./debootstrap/debootstrap --second-stage
+sudo mkdir /mnt/sdcard
+sudo cat > /mnt/etc/resolv.conf << STOP
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+STOP
+umount /mnt
