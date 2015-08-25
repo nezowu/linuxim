@@ -16,6 +16,7 @@ fi
 mount -o loop -t ext4 /storage/sdcard1/debian.img $MNT
 mount -t proc   proc    $MNT/proc
 mount -t sysfs  sysfs   $MNT/sys
+mount -o bind /dev $MNT/dev
 mount -t devpts devpts  $MNT/dev/pts
 mount -o bind /sdcard $MNT/sdcard
 busybox sysctl -w net.ipv4.ip_forward=1
@@ -23,6 +24,7 @@ busybox sysctl -w net.ipv4.ip_forward=1
 chroot $MNT /bin/bash -l
 
 umount $MNT/dev/pts
+umount $MNt/dev
 umount $MNT/sys
 umount $MNT/proc
 umount $MNT/sdcard
