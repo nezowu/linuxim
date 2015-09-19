@@ -1,4 +1,4 @@
-dd if=/dev/zero of=debian.img bs=10M count=1536
+dd if=/dev/zero of=debian.img bs=1M count=1536
 sudo mkfs.ext4 -v debian.img
 sudo mount -o loop debian.img /mnt
 sudo debootstrap --arch=armhf --variant=minbase --foreign --no-check-gpg \
