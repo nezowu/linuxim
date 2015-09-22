@@ -13,18 +13,19 @@ if [ ! -d "$MNT" ]; then
 	mkdir -p /data/local/tmp/linux
 fi
 
-mount -o loop -t ext4 /storage/sdcard1/debian.img $MNT
+mount -o loop,noatime -t ext4 /storage/sdcard1/debian.img $MNT
 mount -t proc   proc    $MNT/proc
 mount -t sysfs  sysfs   $MNT/sys
-mount -o bind /dev $MNT/dev
+#mount -o bind /dev $MNT/dev
 mount -t devpts devpts  $MNT/dev/pts
 mount -o bind /sdcard $MNT/sdcard
 busybox sysctl -w net.ipv4.ip_forward=1
 
 chroot $MNT /bin/bash -l
-
+for pid in `$bbox lsof | $bbox grep $mnt | $bbox sed -e's/  / /g' | $bbox cut -d' ' -f2`; do $bbox kill -9 $pid >/dev/null 2>&1; done
+sleep 5
 umount $MNT/dev/pts
-umount $MNt/dev
+#umount $MNt/dev
 umount $MNT/sys
 umount $MNT/proc
 umount $MNT/sdcard
