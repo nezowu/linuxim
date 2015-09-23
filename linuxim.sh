@@ -22,7 +22,7 @@ mount -o bind /sdcard $MNT/sdcard
 busybox sysctl -w net.ipv4.ip_forward=1
 
 chroot $MNT /bin/bash -l
-for pid in `$bbox lsof | $bbox grep $mnt | $bbox sed -e's/  / /g' | $bbox cut -d' ' -f2`; do $bbox kill -9 $pid >/dev/null 2>&1; done
+for pid in `busybox lsof | busybox grep $mnt | busybox sed -e's/  / /g' | busybox cut -d' ' -f2`; do busybox kill -9 $pid >/dev/null 2>&1; done
 sleep 5
 umount $MNT/dev/pts
 #umount $MNt/dev
