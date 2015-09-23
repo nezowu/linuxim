@@ -13,7 +13,7 @@ if [ ! -d "$MNT" ]; then
 	mkdir -p /data/local/tmp/linux
 fi
 
-mount -o loop,noatime -t ext4 /storage/sdcard1/debian.img $MNT
+mount -o loop -t ext4 /storage/sdcard1/debian.img $MNT
 mount -t proc   proc    $MNT/proc
 mount -t sysfs  sysfs   $MNT/sys
 #mount -o bind /dev $MNT/dev
